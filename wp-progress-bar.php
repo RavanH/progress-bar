@@ -3,7 +3,7 @@
 Plugin Name: Progress Bar
 Plugin URI: https://github.com/jazzsequence/progress-bar
 Description: a simple progress bar shortcode that can be styled with CSS
-Version: 1.1.0
+Version: 1.1.1
 Author: Chris Reynolds
 Author URI: http://museumthemes.com
 License: GPL3
@@ -50,7 +50,7 @@ add_action( 'init', 'wppb_init' );
  * simple shortcode that displays a progress bar
  * @author Chris Reynolds
  * @since 0.1
- * @param string $progress REQUIRED displays the actual progress bar in % or in x/y | usage [wppb progress=50] or [wppb progress=500/1000]
+ * @param string $progress REQUIRED displays the actual progress bar in % | usage [wppb progress=50]
  * @param string $option OPTIONAL calls various options. These can be user-input (uses CSS classes, so anything a user adds to their CSS could potentially be used as an option) or any of the pre-defined options/styles. Included options (as of 1.0.1): candystripes, animated-candystripes, red | usage [wppb progress=50 option="red candystripes"] [wppb progress=50 option=animated-candystripes]
  * @param string $percent OPTIONAL displays the percentage either on the bar itself, or after the progress bar, depending on which parameter is used. Options are 'after' and 'inside'. | usage [wppb progress=50 percent=after]
  */
@@ -60,7 +60,9 @@ function wppb( $atts ) {
 		'progress' => '',		// the progress in % or x/y
 		'option' => '',			// what options you want to use (candystripes, animated-candystripes, red)
 		'percent' => '',		// whether you want to display the percentage and where you want that to go (after, inside)
-		'fullwidth' => ''		// determines if the progress bar should be full width or not
+		'fullwidth' => '',		// determines if the progress bar should be full width or not
+		'border' => ''		// determines if the progress bar placeholder should have a small top and bottom border,
+					// useful when the progress bar overflows the placeholder (more than 100%)
 		), $atts ) );
 	$pos = strpos($progress, '/');
 	if($pos===false) {
@@ -84,6 +86,9 @@ function wppb( $atts ) {
 		$wppb_output .= "<div class=\"{$percent}\">{$progress}</div>";
 	}
 	$wppb_output 	.= 	"<div class=\"wppb-progress";
+	if ($atts['border']) {
+		$wppb_output .= " border";
+	}
 	if ($atts['fullwidth']) {
 		$wppb_output .= " full";
 	}
