@@ -37,11 +37,24 @@ License: GPL3
 div.wppb-progress {
 	height: 25px;
 	width: 400px;
-	background: #555;
+	background: #555;/* Old browsers */
+	background: -moz-linear-gradient(top, #444 0%, #666 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444), color-stop(100%,#666)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #444 0%,#666 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #444 0%,#666 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #444 0%,#666 100%); /* IE10+ */
+	background: linear-gradient(top, #444 0%,#666 100%); /* W3C */
 	-moz-border-radius: 30px;
 	-o-border-radius: 30px;
 	border-radius: 30px;
 	position: relative;
+}
+
+div.wppb-progress.border {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-color:#333;
+	border-style: solid;	
 }
 div.wppb-progress > span {
 	display: block;
@@ -177,3 +190,10 @@ div.wppb-wrapper.after div.after { float: right; line-height: 25px; }
 /* inside */
 div.wppb-wrapper.inside { width: 400px; height: 25px; position: relative; }
 div.wppb-wrapper div.inside { margin: 0 auto; line-height: 25px; color: #ffffff; font-weight: bold; position: absolute; z-index: 1; width: 400px; text-align: center; }
+
+/* responsive */
+div.wppb-progress.full,
+div.wppb-wrapper.full,
+div.wppb-wrapper.full div.inside {
+	width: 100%;
+}
